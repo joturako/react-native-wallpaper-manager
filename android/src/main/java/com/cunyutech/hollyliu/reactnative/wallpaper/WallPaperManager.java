@@ -96,7 +96,7 @@ public class WallPaperManager extends ReactContextBaseJavaModule {
         }
 
         //handle base64
-        if ("data:image/png;base64,".startsWith(source)){
+        if (source.startsWith("data:image/png;base64,") || source.startsWith("data:image/jpeg;base64,")) {
             mCurrentActivity.runOnUiThread(new Runnable() {
                 public void run() {
                     ThreadUtil.assertMainThread();
@@ -219,7 +219,7 @@ public class WallPaperManager extends ReactContextBaseJavaModule {
     }
 
     private SimpleTarget<byte[]> getSimpleTarget(final String source){
-        return new SimpleTarget<byte[]>(1080, 1920){
+        return new SimpleTarget<byte[]>(1080, 2160){
             @Override
             public void onResourceReady(byte[] resource, GlideAnimation<? super byte[]> glideAnimation) {
                 Bitmap bitmap = BitmapFactory.decodeByteArray(resource, 0, resource.length);
